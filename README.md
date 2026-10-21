@@ -102,22 +102,6 @@ erDiagram
 Tables: `profiles`, `categories`, `products`, `suppliers`, `purchase_orders`, `purchase_order_items`, `stock_movements`.
 Generated columns keep derived data honest: `products.is_low_stock` and `purchase_order_items.line_total`.
 
-## 6. Key design decisions
-
-| Decision | Reason | Trade-off |
-|---|---|---|
-| Stock changes only in Postgres functions (`receive_purchase_order`, `adjust_stock`, an insert trigger) | Atomic, race-safe, one audit trail, same behaviour on every client | Logic lives in SQL, so it must be migrated and tested separately |
-| `FOR UPDATE` row lock when receiving | Two devices tapping "Receive" cannot add stock twice | Brief lock per order |
-| `stock_movements` is **SELECT-only** for clients | History cannot be forged from the app | Needs `security definer` writers, so they fix `search_path` and filter by `auth.uid()` |
-| DB trigger guards PO status transitions | Even a modified client cannot jump `draft` to `received` | Extra migration (`004`) |
-| Row Level Security on every table, `user_id default auth.uid()` | Per-user isolation; user id cannot be spoofed | Every query is filtered by policy |
-| Stock field is disabled on the product edit form | Stock must go through receive/adjust, so history stays complete | Slightly less convenient than a free edit |
-| `PaginatedListController<T>` base class (template method) | Pagination, debounced search, realtime refetch and stale-response protection written once and reused by Products, Suppliers, Orders and History | One more abstraction to learn |
-| Server-side pagination, search and sort | Scales past thousands of rows | Needs indexes (included) |
-| Realtime triggers a debounced silent refetch | Keeps filters and sort consistent instead of patching lists by hand | One extra query per event burst |
-| Text controllers live in the widget `State`, not in `GetxController` | Avoids "used after dispose" when GetX disposes controllers on route changes | Slightly more boilerplate in forms |
-| Zero hardcoded strings/numbers/columns | All in `core/constants` (`AppStrings`, `AppDb`, `AppValues`, `AppDimensions`) | More files, but one place to change anything |
-
 ## 7. Problems I hit and how I fixed them
 
 - **"TextEditingController used after dispose"**: `Get.offAllNamed` disposed controllers while the widget was still building. Moved text controllers into the screen `State`.
