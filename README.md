@@ -5,7 +5,7 @@ Track products and suppliers, raise purchase orders, and let the database keep s
 
 > Demo video: **https://www.loom.com/share/a931ce0ae8dc46bdbd77bab606f33ab6**  |  APK: **https://github.com/hwb06/Stockpilot/releases/download/v1.0.0/app-release.apk**
 
-<!-- App Screenshots
+## App Screenshots:
 <p>
   <img src="docs/screenshots/stockpilot_dashboard.JPG" width="200">
   <img src="docs/screenshots/stockpilot_history.JPG" width="200">
@@ -13,7 +13,6 @@ Track products and suppliers, raise purchase orders, and let the database keep s
   <img src="docs/screenshots/stockpilot_products.JPG" width="200">
   <img src="docs/screenshots/stockpilot_suppliers.JPG" width="200">
 </p>
--->
 
 ---
 
