@@ -3,7 +3,7 @@
 **Inventory & purchase management app built with Flutter, GetX and Supabase.**
 Track products and suppliers, raise purchase orders, and let the database keep stock levels and an audit trail correct automatically.
 
-> Demo video: **https://www.loom.com/share/a931ce0ae8dc46bdbd77bab606f33ab6**  |  APK: **[ADD LINK, optional]**
+> Demo video: **https://www.loom.com/share/a931ce0ae8dc46bdbd77bab606f33ab6**  |  APK: **https://github.com/hwb06/Stockpilot/releases/download/v1.0.0/app-release.apk**
 
 <!-- App Screenshots
 <p>
